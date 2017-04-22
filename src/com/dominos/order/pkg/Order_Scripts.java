@@ -257,12 +257,21 @@ public class Order_Scripts extends Generic_Methods {
     
     
     
-    @Test(priority=26, enabled=true)
+    @Test(priority=26, enabled=false)
     public void fn_VerifyEveryDayValueOfferText() throws InterruptedException, IOException {
    	 Pizza_Order pizzaorder=PageFactory.initElements(driver, Pizza_Order.class);
 	    pizzaorder.fn_VerifyEveryDayValueOfferText();
 	
 	} 
+    
+    
+    @Test(priority=27, enabled=true)
+    public void fn_MandatoryfieldsValidation() throws InterruptedException, IOException {
+   	 Pizza_Order pizzaorder=PageFactory.initElements(driver, Pizza_Order.class);
+	    pizzaorder.fn_MandatoryfieldsValidation();
+	
+	} 
+
     
 	
    }

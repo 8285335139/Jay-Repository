@@ -24,6 +24,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
@@ -208,6 +209,40 @@ import org.testng.Assert;
 		   		}
 		   	
 		   	
+		   	
+		   	
+		   	public static void fn_Mandatoryalert() throws InterruptedException{
+		//   		String text=ExpectedText.trim();
+		//   		System.out.println(text);
+		   		
+	//	   		String alerttext=driver.findElement(By.xpath("//div[@class='jqimessage']")).getText().trim();
+		//   	     System.out.println(alerttext);
+		//   		 Assert.assertTrue(alerttext.equals(text), "Text not matched: Failed");
+		   	    WebElement Okbutton=driver.findElement(By.xpath("//button[@name='jqi_state0_buttonOk']"));
+		   	    Assert.assertTrue(Okbutton.isDisplayed());
+		   	    Thread.sleep(2000);
+		   	    Okbutton.click();
+		     	}
+		   	
+		   	
+		   	
+		   	
+		   	public static void fn_AlertHandle(String ExpectedText) throws InterruptedException{
+		   	    String text=ExpectedText.trim();
+		   		System.out.println(text);
+		   		Thread.sleep(2000);
+		   		String alerttext=driver.findElement(By.xpath("//div[@class='jqi ']/form/div/div/div[2]")).getText().trim();
+		   	    System.out.println(alerttext);
+		   	    Thread.sleep(2000);
+		   		Assert.assertTrue(alerttext.equals(text), "Text not matched: Failed");
+		   		Thread.sleep(2000);
+		   		driver.findElement(By.xpath("//button[@name='jqi_state0_buttonOk']")).click();
+
+		   	}
+		   	
+		   	
+		   	
+		   	
 		   	public  static void fn_MouseClick(WebElement ElementToClick) {
 		   		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		   		new Actions(driver).click(ElementToClick).build().perform();
@@ -217,6 +252,7 @@ import org.testng.Assert;
 		   				
 		   			}
 		   		}
+		   	
 		   	public  static void fn_MouseDoubleClick(WebElement ElementToClick) {
 		   		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		   		new Actions(driver).doubleClick(ElementToClick).build().perform();

@@ -275,7 +275,7 @@ public class Pizza_Order extends Generic_Methods {
     @FindBy(xpath = "//div[@id='dealOffers']/div/div/h3")
     public WebElement Everydayvalueoffer_TX;
   
-  
+    
   
   
   
@@ -1820,8 +1820,11 @@ public class Pizza_Order extends Generic_Methods {
     public Order fn_VerifyAlertonStep2() throws InterruptedException, IOException{
       try{
     	Thread.sleep(3000);
-    	
-      Assert.assertTrue(AlertOk_BT.isDisplayed());
+    	fn_Click(SelectOffer1_BT);
+    	Thread.sleep(3000);
+    	fn_Click(Step2_LK);
+    	Thread.sleep(3000);    	
+     Assert.assertTrue(AlertOk_BT.isDisplayed());
         Thread.sleep(2000);
         fn_Click(AlertOk_BT);
         Thread.sleep(2000);
@@ -1867,8 +1870,63 @@ public class Pizza_Order extends Generic_Methods {
         }  
     
     
+    public Order fn_MandatoryfieldsValidation() throws InterruptedException{
+    	fn_Click(CheckOut_BT);
+    	Thread.sleep(2000);
+    	fn_Click(PlaceOrder_BT);
+    	Thread.sleep(2000);
+    	
+    	fn_AlertHandle("Please enter your first name, your last name, a valid email address, a valid mobile number, your flat no. and street name.");
+  //  	fn_AlertHandle();
+    	Thread.sleep(2000);
+    	fn_Input(FirstName_TB, "Jay");
+    	Thread.sleep(2000);
+    	fn_Click(PlaceOrder_BT);
+    	Thread.sleep(2000);
+    	fn_AlertHandle("Please enter your last name, a valid email address, a valid mobile number, your flat no. and street name.");
+    	Thread.sleep(2000);
+    	fn_Input(LastName_TB, "Prakash");
+    	Thread.sleep(2000);
+    	fn_Click(PlaceOrder_BT);
+    	Thread.sleep(2000);
+    	fn_AlertHandle("Please enter a valid email address, a valid mobile number, your flat no. and street name.");
+    	Thread.sleep(2000);
+    	fn_Input(EmailId_TB, "jay.prakash@incaendo.com");
+    	Thread.sleep(2000);
+    	fn_Click(PlaceOrder_BT);
+    	Thread.sleep(2000);
+    	fn_AlertHandle("Please enter a valid mobile number, your flat no. and street name.");
+    	fn_Input(Mobile_TB, "8285335139");
+    	Thread.sleep(2000);
+    	fn_Click(PlaceOrder_BT);
+    	Thread.sleep(2000);
+    	fn_AlertHandle("Please enter your flat no. and street name.");
+    	Thread.sleep(2000);
+    	fn_Input(Flat_TB, "14 A");
+    	Thread.sleep(2000);
+    	fn_Click(PlaceOrder_BT);
+    	Thread.sleep(2000);
+    	fn_AlertHandle("Please enter street name.");
+    	Thread.sleep(2000);
+    	fn_Input(Street_TB, "Mayur Vihar");
+    	Thread.sleep(2000);
+    	fn_Click(PlaceOrder_BT);
+    	Thread.sleep(2000);
+    	fn_AlertHandle("Please add atleast one product before you proceed.");
+    	Thread.sleep(2000);
+        fn_Click(Menu_BT);
+  //  	Thread.sleep(3000);
+    	
+    	Order orderobj = PageFactory.initElements(driver, Order.class);
+ 		return orderobj;
+    }
+    
+    
+    
+    
+    
     
     
     
 
-   }
+    }
