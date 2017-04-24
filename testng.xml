@@ -3,13 +3,44 @@
 <suite name="Parallel Test Suite" thread-count="2"  parallel="tests">
  	 <test name="Test on Chrome">
          <parameter name="browser" value="chrome" />
-   			<classes>
-
-                   <class name="com.dominos.order.pkg.Order_Scripts"/> 
-   			 </classes>
+         
+        <groups> -->
+         <run>
+           <include name="Regression" />
+         </run>
+        </groups>
+         
+        <classes>
+           <class name="com.dominos.order.pkg.Order_Scripts"/> 
+   		</classes>
   	 </test> 
   
   
+
+
+
+<!--      <test name="Test only regression scenarios"> -->
+<!--       <groups> -->
+<!--       <run> -->
+<!--         <include name="Regression" /> -->
+<!--       </run> -->
+<!--     </groups> -->
+<!--          <classes> -->
+<!--            <class name="com.dominos.order.pkg.Order_Scripts"/>  -->
+<!--    		 </classes> -->
+
+<!--       </test> -->
+
+
+
+
+
+
+
+
+
+
+
 <!--    	<test name="Test on Firefox">  -->
 <!--   		<parameter name="browser" value="Firefox" /> -->
 <!--     		<classes>  -->
