@@ -13,6 +13,7 @@ import java.io.IOException;
 	import java.util.Iterator;
 	import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.Random;
 	import java.util.Set;
 	import java.util.concurrent.TimeUnit;
@@ -45,8 +46,7 @@ import org.testng.Assert;
 	    public class Generic_Methods {
 	     
 	    	
-	    	
-		    public static WebDriver driver;
+	    	public static WebDriver driver;
 		 
 	     public static void launchBrowser(String browserName){
 	    	 WebDriver DriverObj=null;
@@ -76,17 +76,22 @@ import org.testng.Assert;
 	        }
 	     
 		
-		   public static void fn_LandingHome(){
-				driver.get("https://pizzaonline.dominos.co.in");
-			//	driver.switchTo().alert().accept();
-				driver.manage().window().maximize();
+		   public static void fn_LandingHome() throws IOException{
+			   Properties obj = new Properties();   
+		    	  //Create Object of FileInputStream Class. Pass file path.
+		    	  FileInputStream objfile = new FileInputStream(System.getProperty("user.dir")+"\\src\\ObjectRepo\\objects.properties");
+		    	  //Pass object reference objfile to load method of Properties object.
+		    	  obj.load(objfile);
+			    driver.get(obj.getProperty("URL"));
+			    driver.manage().window().maximize();
 				driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
 				driver.manage().timeouts().pageLoadTimeout(180, TimeUnit.SECONDS);
 				driver.manage().timeouts().setScriptTimeout(180, TimeUnit.SECONDS);
 	         }
 		   
 	     
-		   public static void fn_Click(WebElement ElementToClick){ 
+		   
+		  public static void fn_Click(WebElement ElementToClick){ 
 	//		  driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
 			    try{
 			     WebDriverWait wait = new WebDriverWait(driver, 15);

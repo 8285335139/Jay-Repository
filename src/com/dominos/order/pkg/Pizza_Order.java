@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 
 import org.apache.poi.util.SystemOutLogger;
+import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -184,10 +185,10 @@ public class Pizza_Order extends Generic_Methods {
     @FindBy(xpath = "//div[@id='summaryBox']/div[5]/p[3]")
    	public WebElement TotalPayableDealThankyouPage_TX;
     
-    @FindBy(xpath = "//span[@id='upsell_div_side_21'][2]")
+    @FindBy(xpath = "//span[@id='upsell_div_side_61'][2]")
     public WebElement Upsellitem1_Add;
     
-    @FindBy(xpath = "//span[@id='upsell_div_side_61'][2]")
+    @FindBy(xpath = "//span[@id='upsell_div_side_4029'][2]")
     public WebElement Upsellitem2_Add;
     
     @FindBy(id = "upsell_quick_sides")
@@ -248,6 +249,9 @@ public class Pizza_Order extends Generic_Methods {
     @FindBy(xpath = "//div[@id='cartView']/div/ul/li/a[2]")
     public WebElement RemoveCorePizza_LK;
   
+    @FindBy(xpath = "//div[@id='cartView']/div/ul/li[2]/a[2]")
+    public WebElement Remove2ndPizza_LK;
+  
     @FindBy(xpath = "//div[@id='cartView']/div/div/a")
     public WebElement RemoveDeal_LK;
     
@@ -275,7 +279,8 @@ public class Pizza_Order extends Generic_Methods {
     @FindBy(xpath = "//div[@id='dealOffers']/div/div/h3")
     public WebElement Everydayvalueoffer_TX;
   
-    
+    @FindBy(xpath = "//button[@name='jqi_state0_buttonYes']")
+    public WebElement AlertYes_BT;
   
   
   
@@ -615,7 +620,7 @@ public class Pizza_Order extends Generic_Methods {
   
     public Order AmountVerify_MediumSizeWithoutTopping() throws InterruptedException, IOException{
     	   try{
-    	Thread.sleep(3000);
+    	    Thread.sleep(3000);
             fn_Click(PizzaMenu_LK);
         	Thread.sleep(2000);
         	fn_mouseOver(DeluxeVeggie_Pizza);
@@ -663,8 +668,6 @@ public class Pizza_Order extends Generic_Methods {
         	Thread.sleep(4000);
         	
   //      	fn_FetchExcelData(1);
-        	
-        	
         	fn_DeliveryDetails();
         	fn_AmountVerify_Pizza();
            }
@@ -1923,7 +1926,60 @@ public class Pizza_Order extends Generic_Methods {
     
     
     
-    
+    public Order fn_VerifyUpsellPizzaMania() throws InterruptedException, IOException{
+       try{
+    	fn_Click(PizzaMenu_LK);
+        Thread.sleep(2000);
+      	fn_mouseOver(DeluxeVeggie_Pizza);
+      	Thread.sleep(2000);
+      	fn_Click(QuickAddDuluxeViggie_LK);
+      	Thread.sleep(3000);	
+        fn_Click(PizzaMania_LK);
+        Thread.sleep(3000);
+    	fn_mouseOver(VegLoaded_PizzaMania);
+    	Thread.sleep(2000);
+    	fn_Click(AddToCartVegLoaded_PizzaMania);
+    	Thread.sleep(3000);
+    	fn_Click(CheckOut_BT);
+    	Thread.sleep(15000);
+    	fn_Click(Upsellitem2_Add);
+    	Thread.sleep(2000);
+    	fn_Click(UpsellAddToCart_BT);
+    	Thread.sleep(2000);
+    	fn_ScrollDown100();
+    	Thread.sleep(2000);
+    	fn_Click(RemoveCorePizza_LK);
+    	Thread.sleep(3000);
+       try{
+////    	Assert.assertTrue(!isElementPresent(Remove2ndPizza_LK));
+    	if(Remove2ndPizza_LK.isDisplayed()){
+    		System.out.println("Upsell is not removed along with core pizza: Failed");
+   	}}
+    	catch(ElementNotVisibleException e){
+    		System.out.println("Upsell is removed along with core pizza: Passed");
+    	}
+    	Thread.sleep(2000);
+    	fn_Click(RemoveCorePizza_LK);
+    	Thread.sleep(3000);
+    	try{
+    		if(AlertYes_BT.isDisplayed()){
+    			fn_Click(AlertYes_BT);
+            	Thread.sleep(5000);
+    		    }
+    	       }
+    	catch(ElementNotVisibleException e){
+    		fn_Click(Menu_BT);
+        	Thread.sleep(3000);
+    	     }
+    	}
+        catch(NoSuchElementException e){
+        	fn_Click(Menu_BT);
+        	Thread.sleep(3000);
+        }
+        Order orderobj = PageFactory.initElements(driver, Order.class);
+		return orderobj;
+    	
+      }
     
     
     

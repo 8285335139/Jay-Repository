@@ -48,7 +48,7 @@ public class Order_Scripts extends Generic_Methods {
 //	}
 
 	
-	@Test(priority=1, groups="Regression", enabled=true)
+	@Test(priority=1, groups="Regression", enabled=false)
     public void fn_ValidateOrderbyAddToCart() throws InterruptedException, IOException {
    	 Pizza_Order pizzaorder=PageFactory.initElements(driver, Pizza_Order.class);
 	   pizzaorder.fn_OrderbyAddToCart();
@@ -104,7 +104,7 @@ public class Order_Scripts extends Generic_Methods {
 	}
 	
 	
-	@Test(priority=8, groups="Regression", enabled=true)
+	@Test(priority=8, groups="Regression", enabled=false)
     public void fn_OrderPizzaMania() throws InterruptedException, IOException {
    	 Pizza_Order pizzaorder=PageFactory.initElements(driver, Pizza_Order.class);
 	    pizzaorder.fn_OrderPizzaManiaWithPizza();
@@ -112,7 +112,7 @@ public class Order_Scripts extends Generic_Methods {
 	}   
     
     
-    @Test(priority=9, groups="Regression", enabled=true)
+    @Test(priority=9, groups="Regression", enabled=false)
     public void fn_OrderPizzabyCrustCustmize() throws InterruptedException, IOException {
    	 Pizza_Order pizzaorder=PageFactory.initElements(driver, Pizza_Order.class);
 	    pizzaorder.fn_OrderPizzabyCrustCustmize();
@@ -120,7 +120,7 @@ public class Order_Scripts extends Generic_Methods {
 	}  
 	
 	
-	@Test(priority=10, groups="Regression", enabled=true)
+	@Test(priority=10, groups="Regression", enabled=false)
     public void fn_OrderDealwithTopping() throws InterruptedException, IOException {
    	 Pizza_Order pizzaorder=PageFactory.initElements(driver, Pizza_Order.class);
 	    pizzaorder.fn_OrderDealwithTopping();
@@ -257,7 +257,7 @@ public class Order_Scripts extends Generic_Methods {
     
     
     
-    @Test(priority=26, enabled=true)
+    @Test(priority=26, enabled=false)
     public void fn_VerifyEveryDayValueOfferText() throws InterruptedException, IOException {
    	 Pizza_Order pizzaorder=PageFactory.initElements(driver, Pizza_Order.class);
 	    pizzaorder.fn_VerifyEveryDayValueOfferText();
@@ -272,6 +272,16 @@ public class Order_Scripts extends Generic_Methods {
 	
 	} 
 
+    
+    @Test(priority=28, groups="Regression", enabled=false)
+    public void fn_VerifyUpsellPizzaMania() throws InterruptedException, IOException {
+   	 Pizza_Order pizzaorder=PageFactory.initElements(driver, Pizza_Order.class);
+	    pizzaorder.fn_VerifyUpsellPizzaMania();
+	
+	}  
+    
+    
+    
     
 	
    }
