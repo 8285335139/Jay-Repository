@@ -1,9 +1,13 @@
 package com.dominos.order.pkg;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.NoSuchElementException;
+import java.util.Properties;
 
 import org.apache.poi.util.SystemOutLogger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -135,6 +139,9 @@ public class Pizza_Order extends Generic_Methods {
    
     @FindBy(id = "send-otp")
 	public WebElement AuthenticationOTP_LK;
+    
+    @FindBy(id = "otpcode")
+	public WebElement OTP_TB;
     
     @FindBy(id = "submit-otpcode")
    	public WebElement Submit_BT;
@@ -323,26 +330,31 @@ public class Pizza_Order extends Generic_Methods {
     }
     
     
-    public void fn_DeliveryDetails() throws InterruptedException{
-    	fn_Input(FirstName_TB, "Jay");
-        fn_Input(LastName_TB, "Prakash");
-        fn_Input(EmailId_TB, "jay.prakash@incaendo.com");
-        fn_Input(Mobile_TB, "8285335139");
-        fn_Input(Flat_TB, "14 A");
-        fn_Input(Street_TB, "Mayur Vihar");
-    }
+    public void fn_DeliveryDetails() throws InterruptedException, IOException{
+    	Properties obj = new Properties();   
+  	    FileInputStream objfile = new FileInputStream(System.getProperty("user.dir")+"\\src\\ObjectRepo\\objects.properties");
+  	    obj.load(objfile);
+  	    fn_Input(FirstName_TB, obj.getProperty("FirsName"));
+  	    fn_Input(LastName_TB, obj.getProperty("LastName"));
+        fn_Input(EmailId_TB, obj.getProperty("EamilID"));
+        fn_Input(Mobile_TB, obj.getProperty("Mobile"));
+        fn_Input(Flat_TB, obj.getProperty("Flat"));
+        fn_Input(Street_TB, obj.getProperty("Street"));
+  	  }
     
-    public void fn_CODPayment() throws InterruptedException{
-    	Thread.sleep(3000);
-//    	fn_Click(PlaceOrder_BT);
-//    	Thread.sleep(2000);
-    	fn_Click(COD_LK);
+    
+    public void fn_CODPayment() throws InterruptedException, IOException{
+    	Properties obj = new Properties();   
+  	    FileInputStream objfile = new FileInputStream(System.getProperty("user.dir")+"\\src\\ObjectRepo\\objects.properties");
+  	    obj.load(objfile);
+    	
+  	    Thread.sleep(3000);
+        fn_Click(COD_LK);
     	Thread.sleep(2000);
-//        fn_Input(Captcha_TB,"9654336929");
-//        Thread.sleep(10000);
-    //	fn_Click(CaptchaSub_BT);
-    	fn_Click(AuthenticationOTP_LK);
-    	Thread.sleep(20000);
+        fn_Click(AuthenticationOTP_LK);
+    	Thread.sleep(3000);
+    	fn_Input(OTP_TB, obj.getProperty("OTP"));
+    	Thread.sleep(2000);
     	fn_Click(Submit_BT);
     	Thread.sleep(15000);
     }
@@ -350,7 +362,9 @@ public class Pizza_Order extends Generic_Methods {
     
     
     public void fn_AmountVerify_Deal() throws InterruptedException, IOException{
-    	
+    	Properties obj = new Properties();   
+  	    FileInputStream objfile = new FileInputStream(System.getProperty("user.dir")+"\\src\\ObjectRepo\\objects.properties");
+  	    obj.load(objfile);
     	
     	String dealdiscountamtreviewpage=DealDiscountAmountReviewpage_TX.getText().trim();
     	System.out.println("Deal discount amount on Review page:"+ dealdiscountamtreviewpage);
@@ -361,8 +375,9 @@ public class Pizza_Order extends Generic_Methods {
     	String totalpayblereviewpage=TotalPaybleReviewPage_TX.getText().trim();
     	System.out.println("Total Payable amount on Review Page:"+ totalpayblereviewpage);
     	Thread.sleep(2000);
-    	fn_Click(PlaceOrder_BT);
+    //	fn_Click(PlaceOrder_BT);
     	
+    	fn_Click(driver.findElement(By.id(obj.getProperty("PlaceOrder_ID"))));
     	String netpricepaymentpage=NetPricePaymentPage_TX.getText().trim();
     	System.out.println("Net price on Payment page:"+ netpricepaymentpage);
     	
@@ -432,13 +447,21 @@ public class Pizza_Order extends Generic_Methods {
     
     
     public void fn_AmountVerify_Pizza() throws InterruptedException, IOException{
+    	Properties obj = new Properties();   
+  	    FileInputStream objfile = new FileInputStream(System.getProperty("user.dir")+"\\src\\ObjectRepo\\objects.properties");
+  	    obj.load(objfile);
+    	
+    	
     	String netpricereviewpage=NetPriceReviewPage_TX.getText().trim();
     	System.out.println("Net price on Review page:"+ netpricereviewpage);
     	
     	String totalpayblereviewpage=TotalPaybleReviewPage_TX.getText().trim();
     	System.out.println("Total Payable amount on Review Page:"+ totalpayblereviewpage);
     	Thread.sleep(2000);
-    	fn_Click(PlaceOrder_BT);
+  //  	fn_Click(PlaceOrder_BT);
+   
+    	fn_Click(driver.findElement(By.id(obj.getProperty("PlaceOrder_ID"))));
+    	
     	
     	String netpricepaymentpage=NetPricePaymentPage_TX.getText().trim();
     	System.out.println("Net price on Payment page:"+ netpricepaymentpage);
