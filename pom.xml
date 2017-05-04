@@ -3,11 +3,14 @@
   <groupId>Dominos_Project</groupId>
   <artifactId>Dominos_Project</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-   <build>
+   
+   
+    <build>
         <!-- Source directory configuration -->
         <sourceDirectory>src</sourceDirectory>
         <plugins>
-            <!-- Following plugin executes the testng tests -->
+        
+        <!-- Following plugin executes the testng tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                    <artifactId>maven-surefire-plugin</artifactId>
