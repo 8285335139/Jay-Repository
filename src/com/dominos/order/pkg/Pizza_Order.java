@@ -23,7 +23,12 @@ public class Pizza_Order extends Generic_Methods {
 	@FindBy(id = "custCity")
 	public WebElement CustCity_TB;
 	
-	@FindBy(xpath = "//form[@id='buildOrderForm']/div/div/div/span/a/span")
+	//li[@id='pickUpChkBox']/span
+	@FindBy(xpath = "//li[@id='pickUpChkBox']/span")
+	public WebElement PickUp_Store;
+	
+	
+	@FindBy(xpath = "//div[@id='geoPickup']/div/span/a/span")
 	public WebElement city_select;
 	
 	@FindBy(xpath = "//ul[@id='ui-id-1']/li[2]")
@@ -294,6 +299,8 @@ public class Pizza_Order extends Generic_Methods {
     
      
     public Order fn_SelectPizzaStore() throws InterruptedException{
+    	fn_Click(PickUp_Store);
+        Thread.sleep(2000);
     	fn_Click(city_select);
         Thread.sleep(2000);
     	fn_Click(Banglore_City);
